@@ -96,30 +96,30 @@ def edge_weight(n1, n2):
 
 _raw_edges = [
     # West Cluster
-    (1,  24, False),   # Olin ↔ West Courtyard Hub
-    (2,  24, False),   # Beckman ↔ West Courtyard Hub
-    (23, 24, False),   # McGregor ↔ West Courtyard Hub
+    (1,  24, True),   # Olin ↔ West Courtyard Hub
+    (2,  24, True),   # Beckman ↔ West Courtyard Hub
+    (23, 24, True),   # McGregor ↔ West Courtyard Hub
     (4,  24, False),   # Sprague ↔ West Courtyard Hub
-    (3,  24, False),   # Keck ↔ West Courtyard Hub
+    (3,  24, True),   # Keck ↔ West Courtyard Hub
     (6,  25, False),   # Galileo ↔ Parsons-Shanahan Hub
     (5,  25, False),   # Parsons ↔ Parsons-Shanahan Hub
     (8,  25, False),   # Shanahan ↔ Parsons-Shanahan Hub
     (24, 25, False),   # West Courtyard Hub ↔ Parsons-Shanahan Hub
-    (3,  7,  False),   # Keck ↔ Jacobs
+    (3,  7,  True),   # Keck ↔ Jacobs
 
     # Central
     (25, 26, False),   # Parsons-Shanahan Hub ↔ Central Plaza Hub
     (7,  26, False),   # Jacobs ↔ Central Plaza Hub
     (8,  9,  False),   # Shanahan ↔ Kingston
     (9,  26, False),   # Kingston ↔ Central Plaza Hub
-    (9,  27, False),   # Kingston ↔ Kingston South Junction
+    (9,  27, True),   # Kingston ↔ Kingston South Junction
     (26, 10, False),   # Central Plaza Hub ↔ Platt Campus Center
     (26, 11, False),   # Central Plaza Hub ↔ Dining Commons
-    (27, 11, False),   # Kingston South Junction ↔ Dining Commons
+    (27, 11, True),   # Kingston South Junction ↔ Dining Commons
 
     # East Transition
     (10, 28, False),   # Platt ↔ NE Walkway Junction
-    (11, 29, False),   # Dining ↔ SE Walkway Junction
+    (11, 29, True),   # Dining ↔ SE Walkway Junction
     (28, 29, False),   # NE Walkway Junction ↔ SE Walkway Junction
 
     # East Residential
@@ -135,13 +135,13 @@ _raw_edges = [
     (31, 20, False),   # Residence East Hub ↔ Drinkward
     (31, 32, False),   # Residence East Hub ↔ Southeast Branch
     (32, 19, False),   # Southeast Branch ↔ Atwood
-    (32, 21, False),   # Southeast Branch ↔ Case
+    (32, 21, True),   # Southeast Branch ↔ Case
     (32, 22, False),   # Southeast Branch ↔ Linde Residence Hall
 
     # Garett House
     (11, 33, False),   # Dining ↔ South Road Junction
     (33, 34, False),   # South Road Junction ↔ Garrett Branch Node
-    (34, 17, False),   # Garrett Branch Node ↔ Garrett House
+    (34, 17, True),   # Garrett Branch Node ↔ Garrett House
 ]
 
 edges = [
