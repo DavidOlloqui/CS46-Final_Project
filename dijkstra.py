@@ -72,4 +72,6 @@ class Dijkstra:
                     distance.insert(str(next_loc), new_distance)
                     previous_loc.insert(str(next_loc), current_loc)
                     unvisited.decrease_key(next_loc, new_distance)
+                    
+        return None, None
 
