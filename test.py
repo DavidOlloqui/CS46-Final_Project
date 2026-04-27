@@ -1,8 +1,3 @@
-"""
-Smoke tests for the campus Dijkstra implementation.
-Run from inside the `final/` folder:  python3 test.py
-"""
-
 from campus_data import buildings, intersections
 from dijkstra import CampusGraph, Dijkstra
 
