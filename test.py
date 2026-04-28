@@ -6,20 +6,23 @@ graph = CampusGraph()
 router = Dijkstra(graph)
 
 
-def show(origin, destination):
-    distance, route = router.find_shortest_route(origin, destination)
-    print(f"\n{NAME[origin]}  ->  {NAME[destination]}")
-    if route is None:
-        print("  no route found")
-        return
-    print(f"  total: {distance} m,  {len(route)} stops")
-    for loc_id in route:
-        print(f"   {loc_id:>2}  {NAME[loc_id]}")
+def compare(origin, destination):
+    fast_d, fast_r = router.find_shortest_route(origin, destination)
+    safe_d, safe_r = router.find_shortest_route(origin, destination, accessible=True)
+    print(f"\n{NAME[origin]} -> {NAME[destination]}")
+    print(f"  [accessible=False] {fast_d} m, {len(fast_r)} hops")
+    if safe_r is None:
+        print(f"  [accessible=True ] unreachable without stairs")
+    else:
+        diff = safe_d - fast_d
+        suffix = " (no stairs on fastest route)" if diff == 0 else f" (+{diff} m detour)"
+        print(f"  [accessible=True ] {safe_d} m, {len(safe_r)} hops{suffix}")
 
 
 if __name__ == "__main__":
-    show(1, 11)     # Olin Science Center -> Dining Commons
-    show(23, 17)    # McGregor CS Center  -> Garrett House
-    show(8, 22)     # Shanahan Center     -> Linde Residence Hall
-    show(5, 5)      # trivial: same node
-    show(2, 19)     # Beckman Hall        -> Atwood Hall
+    OLIN     = 1     # F.W. Olin Science Center
+    PLATT    = 10    # Joseph B. Platt Campus Center
+    SONTAG   = 18    # Frederick and Susan Sontag Residence Hall
+    compare(OLIN,   PLATT)
+    compare(PLATT,  SONTAG)
+    compare(SONTAG, OLIN)
