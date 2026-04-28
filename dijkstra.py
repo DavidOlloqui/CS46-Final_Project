@@ -19,8 +19,9 @@ class CampusGraph:
 
         for edge in edges:
             from_loc, to_loc, step_distance = edge[0], edge[1], edge[2]
-            paths.search(str(from_loc)).append((to_loc, step_distance))
-            paths.search(str(to_loc)).append((from_loc, step_distance))
+            stairs = edge[3] if len(edge) > 3 else False
+            paths.search(str(from_loc)).append((to_loc, step_distance, stairs))
+            paths.search(str(to_loc)).append((from_loc, step_distance, stairs))
 
         return paths
 
@@ -33,24 +34,25 @@ class Dijkstra:
     def __init__(self, graph):
         self.graph = graph
 
-    def find_shortest_route(self, origin, destination):
+    def find_shortest_route(self, origin, destination, accessible=False):
 
         distance = HashTable()
         previous_loc = HashTable()
         unvisited = MinHeap()
 
         for loc in self.graph.all_locations:
-            initial = 0 if loc == origin else sys.maxsize
-            distance.insert(str(loc), initial)
+            distance.insert(str(loc), sys.maxsize)
             previous_loc.insert(str(loc), None)
-            unvisited.push([initial, loc])
+        distance.insert(str(origin), 0)
+        unvisited.push([0, origin])
 
         while unvisited:
-            current_loc = unvisited.pop()[1]
-            current_distance = distance.search(str(current_loc))
+            current_distance, current_loc = unvisited.pop()
 
-            if current_distance == sys.maxsize:
-                break
+            # Lazy deletion: if we've already found a shorter path to this
+            # node, this heap entry is stale - skip it.
+            if current_distance > distance.search(str(current_loc)):
+                continue
 
             if current_loc == destination:
                 route = [current_loc]
@@ -59,19 +61,22 @@ class Dijkstra:
 
                     current_loc = previous_loc.search(str(current_loc))
                     route.append(current_loc)
-                    
+
                 route.reverse()
 
                 return current_distance, route
 
-            for next_loc, step_distance in self.graph.neighbors(current_loc):
+            for next_loc, step_distance, stairs in self.graph.neighbors(current_loc):
+
+                if accessible and stairs:
+                    continue
 
                 new_distance = current_distance + step_distance
 
                 if new_distance < distance.search(str(next_loc)):
                     distance.insert(str(next_loc), new_distance)
                     previous_loc.insert(str(next_loc), current_loc)
-                    unvisited.decrease_key(next_loc, new_distance)
-                    
+                    unvisited.push([new_distance, next_loc])
+
         return None, None
 
