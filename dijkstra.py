@@ -7,7 +7,7 @@ from heap import MinHeap
 
 class CampusGraph:
 
-    def __init__(self):
+    def __init__(self, accessible=False):
         self.all_locations = [loc_id for loc_id, _ in buildings + intersections]
         self.walking_paths = self._build_walking_paths()
 
