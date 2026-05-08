@@ -66,6 +66,6 @@ The campus map includes 23 named building nodes, 11 pedestrian intersection node
 
 ## Contributions
 
-David Olloqui: Campus Data, Main, GitHub
+David Olloqui: Campus Data, Main, Diagnosis, GitHub Management, Slides
 Rion Otsuka: Hash Map, Diagnosis, Slides
 Rohan Mathew: Djikstra, Visualizations, Slides
